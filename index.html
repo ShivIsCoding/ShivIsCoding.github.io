@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f9fafb;
+            color: #111827;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 5rem 1rem 3rem;
+            background: #f3f4f6;
+            animation: fadeIn 0.5s ease-out;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        header p {
+            font-size: 1rem;
+            color: #6b7280;
+        }
+
+        /* Main grid */
+        main {
+            max-width: 1000px;
+            margin: 0 auto 3rem;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            padding-top: 2rem;
+            animation: slideUp 0.7s ease-out;
+        }
+
+        /* Card styles */
+        .card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+            color: #111827;
+            text-decoration: none;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+            background: #f3f4f6;
+        }
+        .card::after {
+            content: attr(data-clicks) " clicks";
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            font-size: 0.7rem;
+            color: #6b7280;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .card:hover::after {
+            opacity: 1;
+        }
+        .tooltip {
+            visibility: hidden;
+            position: absolute;
+            background: #111827;
+            color: #fff;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            top: -2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        .card:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            animation: fadeIn 0.3s ease-out;
+        }
+        .close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6b7280;
+            transition: color 0.3s ease;
+        }
+        .close:hover {
+            color: #111827;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            font-size: 0.9rem;
+            color: #6b7280;
+            background: #f3f4f6;
+            animation: fadeIn 0.5s ease-out 0.5s backwards;
+        }
+        footer a {
+            color: #111827;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: #4b5563;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            header h1 { font-size: 2rem; }
+            header p { font-size: 0.9rem; }
+            .card { padding: 1rem; font-size: 0.95rem; }
+            .modal-content { padding: 1.5rem; max-width: 90%; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Project Dashboard</h1>
+    <p>Access all your project pages quickly and efficiently</p>
+</header>
+
+<main>
+    <a class="card" href="home.html" data-clicks="0" data-title="Home Page">
+        <span class="tooltip">View Home Page</span>
+        Home
+    </a>
+    <a class="card" href="3d.html" data-clicks="0" data-title="3D Projects">
+        <span class="tooltip">Explore 3D Projects</span>
+        3D
+    </a>
+    <a class="card" href="animatedloader.html" data-clicks="0" data-title="Animated Loader">
+        <span class="tooltip">Check Animated Loader</span>
+        Animated Loader
+    </a>
+    <a class="card" href="brandkit.html" data-clicks="0" data-title="Brand Kit">
+        <span class="tooltip">Access Brand Kit</span>
+        Brand Kit
+    </a>
+    <a class="card" href="dashwoard.html" data-clicks="0" data-title="Dashboard">
+        <span class="tooltip">Open Dashboard</span>
+        Dashboard
+    </a>
+    <a class="card" href="dashwprd02.html" data-clicks="0" data-title="Dashboard 02">
+        <span class="tooltip">View Dashboard 02</span>
+        Dashboard 02
+    </a>
+    <a class="card" href="features.html" data-clicks="0" data-title="Features">
+        <span class="tooltip">See Features</span>
+        Features
+    </a>
+    <a class="card" href="image_slider.html" data-clicks="0" data-title="Image Slider">
+        <span class="tooltip">Explore Image Slider</span>
+        Image Slider
+    </a>
+    <a class="card" href="parallax.html" data-clicks="0" data-title="Parallax">
+        <span class="tooltip">View Parallax Effect</span>
+        Parallax
+    </a>
+    <a class="card" href="scroll_and_pop_up.html" data-clicks="0" data-title="Scroll & Pop Up">
+        <span class="tooltip">Check Scroll & Pop Up</span>
+        Scroll & Pop Up
+    </a>
+    <a class="card" href="slider_networks.html" data-clicks="0" data-title="Slider Networks">
+        <span class="tooltip">Explore Slider Networks</span>
+        Slider Networks
+    </a>
+    <a class="card" href="stage.html" data-clicks="0" data-title="Stage">
+        <span class="tooltip">View Stage</span>
+        Stage
+    </a>
+</main>
+
+<footer>
+    Made with ❤️ by <a href="https://chat.openai.com/">ChatGPT</a> & <a href="https://grok.ai/">Grok AI</a>
+</footer>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="modal-title"></h2>
+        <p id="modal-description">Click a project card to see more details here!</p>
+    </div>
+</div>
+
+<script>
+    // Animation on load
+    window.addEventListener('load', () => {
+        document.querySelector('header').style.opacity = '1';
+        document.querySelector('main').style.opacity = '1';
+        document.querySelector('footer').style.opacity = '1';
+    });
+
+    // Click counter and modal
+    const cards = document.querySelectorAll('.card');
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDescription = document.getElementById('modal-description');
+    const closeModal = document.querySelector('.close');
+
+    cards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent default link behavior
+            const clicks = parseInt(card.getAttribute('data-clicks')) || 0;
+            card.setAttribute('data-clicks', clicks + 1);
+
+            const title = card.getAttribute('data-title');
+            modalTitle.textContent = title;
+            modalDescription.textContent = `This is a brief overview of ${title}. Click again to visit the page or close this modal.`;
+            modal.style.display = 'flex';
+
+            // After 2 seconds, allow navigation or close
+            setTimeout(() => {
+                card.addEventListener('click', () => {
+                    window.location.href = card.getAttribute('href');
+                }, { once: true });
+            }, 2000);
+        });
+    });
+
+    closeModal.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+</script>
+
+</style>
+</head>
+<body>
+
+</body>
+</html>
